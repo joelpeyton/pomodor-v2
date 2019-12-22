@@ -1,0 +1,93 @@
+body {
+    background-color: #eeeeee;
+    font-family: monospace;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.description {
+    margin-bottom: 100px;
+}
+
+#play {
+    font-size: 86px;
+    margin-bottom: 50px;
+}
+
+.timers {
+    width: 760px;
+    margin: auto;
+    font-size: 48px;
+}
+
+.timers div{
+    width: 300px;
+    padding: 0px 40px;
+    float: left;
+}
+
+#break, .break {
+    color: #f3070b;
+}
+
+#session, .session {
+    color: #4caf50;
+}
+
+#bminus:hover,
+#bplus:hover,
+#sminus:hover,
+#splus:hover,
+#play:hover {
+    cursor: pointer;
+}
+
+#bminus, #sminus {
+    float: left;
+}
+
+#bplus, #splus {
+    float: right;
+}
+
+.break {
+    clear: left;
+}
+
+@media screen and (max-width: 424px) {
+    #play {
+        font-size: 48px;
+    }
+
+    .timers {
+        width: 320px;
+        font-size: 24px;
+        margin-bottom: 150px;
+    }
+
+    .timers div{
+        width: 130px;
+        padding: 0px 10px;
+    }
+}
+
+@media screen and (max-width: 760px) and (min-width: 425px){
+    #play {
+        font-size: 64px;
+    }
+
+    .timers {
+        width: 420px;
+        font-size: 32px;
+        margin-bottom: 150px;
+    }
+
+    .timers div{
+        width: 180px;
+        padding: 0px 10px;
+    }
+}
+
