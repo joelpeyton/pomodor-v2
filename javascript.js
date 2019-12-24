@@ -9,27 +9,28 @@ class Pomodoro {
         this.smins = smins;
         this.isPlayBtn = true;
         this.isSession = true;
+        this.playBtn = document.querySelector("#play");
         // add event listeners
-        document.getElementById("play").addEventListener("click", () => this.playBtn());
+        this.playBtn.addEventListener("click", () => this.playBtnPressed());
         // create timers and set
-        this.bt = new Timer("bmin", "bsec", "bminus", "bplus");
-        this.st = new Timer("smin", "ssec", "sminus", "splus");
+        this.bt = new Timer("#bmin", "#bsec", "#bminus", "#bplus");
+        this.st = new Timer("#smin", "#ssec", "#sminus", "#splus");
         this.bt.setMins(this.bmins);
         this.st.setMins(this.smins);
     }
     
     // switches between a pause and play icon
     // invokes play() or pause() accordingly  
-    playBtn() {
+    playBtnPressed() {
         if (this.isPlayBtn) {
-            document.getElementById("play").innerHTML = '<i class="fa fa-pause-circle-o" aria-hidden="true"></i>';
+            this.playBtn.innerHTML = '<i class="fa fa-pause-circle-o" aria-hidden="true"></i>';
             this.play();
             this.isPlayBtn = false;
         } else {
-            document.getElementById("play").innerHTML = '<i class="fa fa-play-circle-o" aria-hidden="true"></i>';
+            this.playBtn.innerHTML = '<i class="fa fa-play-circle-o" aria-hidden="true"></i>';
             this.pause();
             this.isPlayBtn = true;
-        };
+        }
     }
     
     // starts the appropriate timer
@@ -38,7 +39,7 @@ class Pomodoro {
             this.st.start();
         } else {
             this.bt.start();
-        };
+        }
         setInterval( () => this.checkTime(), 1000);
     }
     
@@ -48,7 +49,7 @@ class Pomodoro {
             this.st.stop();
         } else {
             this.bt.stop();
-        };
+        }
     }
     
     // checks if timer has finished
@@ -61,15 +62,15 @@ class Pomodoro {
                 this.bt.start();
                 this.st.setMins(this.smins);
                 this.st.stop();
-            };
+            }
         } else {
             if (this.bt.hasFinished) {
                 this.isSession = true;
                 this.st.start();
                 this.bt.setMins(this.bmins);
                 this.bt.stop();
-            };
-        };
+            }
+        }
     }
 }
 
@@ -82,24 +83,28 @@ class Timer {
         this.plusId = plusId;
         this.interval = null;
         this.hasFinished = null; 
+        this.minusBtn = document.querySelector(this.minusId);
+        this.plusBtn = document.querySelector(this.plusId);
+        this.minutes = document.querySelector(this.minId);
+        this.seconds = document.querySelector(this.secId);
         // add event listeners
-        document.getElementById(this.minusId).addEventListener("click", () => this.decreaseMins());
-        document.getElementById(this.plusId).addEventListener("click", () => this.increaseMins());
+        this.minusBtn.addEventListener("click", () => this.decreaseMins());
+        this.plusBtn.addEventListener("click", () => this.increaseMins());
     }
     
     // returns number of mins
     getMins() {
-        return parseInt(document.getElementById(this.minId).innerHTML);
+        return parseInt(this.minutes.innerHTML);
     }
     
     // returns number of secs
     getSecs() {
-        return parseInt(document.getElementById(this.secId).innerHTML);
+        return parseInt(this.seconds.innerHTML);
     }
 
     // sets number of mins
     setMins(mins) {
-        document.getElementById(this.minId).innerHTML = mins; 
+        this.minutes.innerHTML = mins; 
     }
     
     // sets number of seconds
@@ -107,7 +112,7 @@ class Timer {
         if (secs < 10) {
             secs = "0" + secs; 
         }
-        document.getElementById(this.secId).innerHTML = secs; 
+        this.seconds.innerHTML = secs; 
     }
     
     // used by minus button
@@ -116,7 +121,7 @@ class Timer {
         let mins = this.getMins();
         if (mins > 0) {
             this.setMins(mins - 1);
-        };
+        }
     }
     
     // used by plus button
@@ -146,10 +151,10 @@ class Timer {
                 this.setMins(this.getMins() - 1)
             } else {
                 this.setSecs(secs - 1);    
-            };
+            }
         } else {
             this.hasFinished = true;
-        };
+        }
     }
     
     // begins countdown of timer 
@@ -165,5 +170,5 @@ class Timer {
 }
 
 // create a pomodoro clock
-p = new Pomodoro(5, 25);
+let p = new Pomodoro(5, 25);
 
